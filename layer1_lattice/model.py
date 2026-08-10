@@ -22,7 +22,6 @@ def initialize_lattice(L, misfolded_fraction=0.01):
         -1 -> Native
         +1 -> Misfolded
     """
-
     lattice = np.full((L, L), NATIVE, dtype=int)
 
     number_of_sites = L * L
@@ -36,7 +35,6 @@ def initialize_lattice(L, misfolded_fraction=0.01):
             size=number_of_misfolded,
             replace=False
         )
-
         lattice.flat[indices] = MISFOLDED
 
     return lattice
@@ -50,7 +48,6 @@ def misfolded_fraction(lattice):
     """
     Calculate the fraction of misfolded states.
     """
-
     return np.mean(lattice == MISFOLDED)
 
 
@@ -61,17 +58,11 @@ def misfolded_fraction(lattice):
 def local_energy(lattice, i, j, J=1.0, h=0.0):
     """
     Calculate the local energy contribution of a single lattice site.
-
-    Hamiltonian:
-        H = -J * sum(s_i s_j) + h * sum(s_i)
-
-    using nearest-neighbor interactions.
+    Hamiltonian: H = -J * sum(s_i s_j) + h * sum(s_i)
     """
-
     L = lattice.shape[0]
     s = lattice[i, j]
 
-    # Nearest neighbors with periodic boundary conditions
     neighbors = [
         lattice[(i - 1) % L, j],  # up
         lattice[(i + 1) % L, j],  # down
@@ -91,14 +82,8 @@ def local_energy(lattice, i, j, J=1.0, h=0.0):
 
 def delta_energy(lattice, i, j, J=1.0, h=0.0):
     """
-    Calculate the change in total energy
-    if the state at (i, j) is flipped.
-
-    The proposed transition is:
-        s_i -> -s_i
-
-    Returns:
-        Delta H = H_new - H_old
+    Calculate the change in total energy if the state at (i, j) is flipped.
+    Returns: Delta H = H_new - H_old
     """
     s = lattice[i, j]
     L = lattice.shape[0]
@@ -121,55 +106,62 @@ def delta_energy(lattice, i, j, J=1.0, h=0.0):
 
 
 # ----------------------------------
-# Test
+# Metropolis acceptance
+# ----------------------------------
+
+def metropolis_accept(delta_H, T):
+    """
+    Determine whether to accept a proposed flip using the Metropolis criterion.
+    P_accept = min(1, exp(-Delta H / T))
+    """
+    if delta_H <= 0:
+        return True
+
+    p = np.exp(-delta_H / T)
+    return np.random.rand() < p
+
+
+# ----------------------------------
+# Monte Carlo step (1 Sweep)
+# ----------------------------------
+
+def monte_carlo_step(lattice, T, J=1.0, h=0.0):
+    """
+    Perform 1 Monte Carlo sweep (L*L attempts to flip random sites).
+    """
+    L = lattice.shape[0]
+    num_attempts = L * L
+
+    for _ in range(num_attempts):
+        i = np.random.randint(0, L)
+        j = np.random.randint(0, L)
+
+        dH = delta_energy(lattice, i, j, J=J, h=h)
+
+        if metropolis_accept(dH, T):
+            lattice[i, j] *= -1
+
+    return lattice
+
+
+# ----------------------------------
+# Complete Layer 1 Test
 # ----------------------------------
 
 if __name__ == "__main__":
-    # Small controlled lattice
-    lattice = np.array([
-        [-1, -1, -1],
-        [-1, +1, -1],
-        [-1, -1, -1]
-    ])
+    print("=== Testing Complete Layer 1 Model ===")
+    
+    # 1. Initialize
+    lattice = initialize_lattice(L, misfolded_fraction=0.10)
+    initial_frac = misfolded_fraction(lattice)
+    print(f"Initial misfolded fraction: {initial_frac:.4f}")
 
-    J = 1.0
-    h = 0.0
+    # 2. Run Monte Carlo simulation for 100 steps
+    T = 1.5
+    print(f"Running 100 Monte Carlo sweeps at Temperature T = {T}...")
+    for step in range(100):
+        monte_carlo_step(lattice, T=T)
 
-    print("Initial lattice:")
-    print(lattice)
-
-    i, j = 1, 1
-
-    energy_before = local_energy(
-        lattice,
-        i,
-        j,
-        J=J,
-        h=h
-    )
-
-    delta_H = delta_energy(
-        lattice,
-        i,
-        j,
-        J=J,
-        h=h
-    )
-
-    print("\nState before flip:", lattice[i, j])
-    print("Local energy before flip:", energy_before)
-    print("Delta H:", delta_H)
-
-    # Flip the state
-    lattice[i, j] *= -1
-
-    energy_after = local_energy(
-        lattice,
-        i,
-        j,
-        J=J,
-        h=h
-    )
-
-    print("\nState after flip:", lattice[i, j])
-    print("Local energy after flip:", energy_after)
+    final_frac = misfolded_fraction(lattice)
+    print(f"Final misfolded fraction after 100 steps: {final_frac:.4f}")
+    print("=== Layer 1 is 100% Ready! ===")
