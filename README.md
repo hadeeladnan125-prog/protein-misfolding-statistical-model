@@ -26,3 +26,22 @@ $$H = -J \sum_{\langle i,j \rangle} s_i s_j + h \sum_i s_i$$
   * Controls baseline stability. A positive bias ($h > 0$) prevents spontaneous global misfolding, maintaining native state stability unless triggered.
 * **$T$ (Effective Temperature / Thermal Fluctuations):**
   * Regulates stochastic fluctuations and state-transition probability during Monte Carlo steps.
+---
+
+## 3. Dynamics (Metropolis Monte Carlo Algorithm)
+
+To simulate state transitions over time, we employ the **Metropolis Monte Carlo** update rule:
+
+1. **State Proposal:** Select a random site $i$ and flip its state:
+   $$s_i \to -s_i$$
+
+2. **Energy Difference Calculation:** Compute the change in total Hamiltonian energy:
+   $$\Delta H = H_{\text{new}} - H_{\text{old}}$$
+
+3. **Acceptance Criterion:**
+   * If $\Delta H \leq 0$: **Accept** the spin flip unconditionally (energy decreases or stays constant).
+   * If $\Delta H > 0$: **Accept** the spin flip with a Boltzmann probability:
+     $$P = e^{-\Delta H / (k_B T)}$$
+
+> **Note:** For computational simplicity, we set $k_B = 1$, making $T$ a dimensionless effective temperature parameter ($P = e^{-\Delta H / T}$).
+> 
