@@ -55,6 +55,36 @@ def misfolded_fraction(lattice):
 
 
 # ----------------------------------
+# Energy calculation
+# ----------------------------------
+
+def local_energy(lattice, i, j, J=1.0, h=0.0):
+    """
+    Calculate the local energy contribution of a single lattice site.
+
+    Hamiltonian:
+        H = -J * sum(s_i s_j) + h * sum(s_i)
+
+    using nearest-neighbor interactions.
+    """
+
+    L = lattice.shape[0]
+    s = lattice[i, j]
+
+    # Nearest neighbors with periodic boundary conditions
+    neighbors = [
+        lattice[(i - 1) % L, j],  # up
+        lattice[(i + 1) % L, j],  # down
+        lattice[i, (j - 1) % L],  # left
+        lattice[i, (j + 1) % L]   # right
+    ]
+
+    interaction_energy = -J * s * sum(neighbors)
+    field_energy = h * s
+
+    return interaction_energy + field_energy
+
+# ----------------------------------
 # Test
 # ----------------------------------
 
@@ -66,4 +96,6 @@ if __name__ == "__main__":
 
     print("Lattice shape:", lattice.shape)
     print("Misfolded fraction:", misfolded_fraction(lattice))
-  
+      e_local = local_energy(lattice, 0, 0, J=1.0, h=0.0)
+    print("Local energy at (0,0):", e_local)
+
