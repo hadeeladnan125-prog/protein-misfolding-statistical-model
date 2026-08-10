@@ -98,7 +98,7 @@ fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 9), sharex=True)
 ax1.errorbar(T_values, f_means, yerr=f_sems, fmt="-o", color="tab:blue", capsize=4, label=r"$\langle f \rangle$")
 ax1.axhline(y=f0, linestyle="--", color="gray", label=f"Initial $f_0={f0}$")
 ax1.set_ylabel(r"Final Misfolded Fraction $\langle f \rangle$")
-ax1.set_title(f"Temperature Refinement & Susceptibility\n$J={J},\\ h={h},\\ L={L},\\ N_{\\mathrm{{runs}}}={num_runs}$")
+ax1.set_title("Temperature Refinement & Susceptibility\nJ=" + str(J) + ", h=" + str(h) + ", L=" + str(L) + ", Runs=" + str(num_runs))
 ax1.grid(True, linestyle=":", alpha=0.6)
 ax1.legend()
 
