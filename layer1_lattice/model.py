@@ -84,6 +84,7 @@ def local_energy(lattice, i, j, J=1.0, h=0.0):
 
     return interaction_energy + field_energy
 
+
 # ----------------------------------
 # Energy change for a flip
 # ----------------------------------
@@ -172,38 +173,3 @@ if __name__ == "__main__":
 
     print("\nState after flip:", lattice[i, j])
     print("Local energy after flip:", energy_after)
-
-
-
-# ----------------------------------
-# Test
-# ----------------------------------
-
-if __name__ == "__main__":
-    lattice = initialize_lattice(
-        L,
-        misfolded_fraction=0.01
-    )
-
-    print("Lattice shape:", lattice.shape)
-    print(
-        "Misfolded fraction:",
-        misfolded_fraction(lattice)
-    )
-
-    # Test local energy
-    i, j = 25, 25
-
-    energy = local_energy(
-        lattice,
-        i,
-        j,
-        J=1.0,
-        h=0.0
-    )
-
-    print(
-        "Local energy at (25,25):",
-        energy
-    )
-
