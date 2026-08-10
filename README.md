@@ -1,47 +1,55 @@
-# Protein Misfolding Statistical Model
+# Physics-Based Model of Protein Misfolding Propagation
 
-A physics-based computational model of protein-state propagation using lattice dynamics and Monte Carlo simulation.
+## Overview
+
+This project develops a minimal physics-based computational model to investigate how local transitions between native and misfolded protein states can produce collective behavior at the system level.
+
+The model uses a two-state lattice representation and Monte Carlo dynamics inspired by interacting statistical-mechanical systems.
 
 ---
 
-## 2. Physical Model (Ising Lattice Framework)
+## Research Question
 
-Before implementation, we define the core effective minimal model representing state dynamics.
+> When can local stochastic transitions between native and misfolded protein states produce system-wide propagation, and how do interaction strength and energetic bias determine the resulting behavior?
 
-### Lattice Setup
-* **Grid:** $L \times L$ 2D lattice.
-* **State Space:** Each site $i$ has a state $s_i \in \{-1, +1\}$:
-  * $s_i = -1$: Native (Normal protein state)
-  * $s_i = +1$: Misfolded (Pathogenic state)
+---
 
-### Model Hamiltonian
-The energy of a given configuration is defined by:
+## Model
+
+Each lattice site represents a simplified protein conformational state:
+
+* $-1 \to \text{Native}$
+* $+1 \to \text{Misfolded}$
+
+The system is described by an effective Hamiltonian:
 
 $$H = -J \sum_{\langle i,j \rangle} s_i s_j + h \sum_i s_i$$
 
-### Parameter Definitions
-* **$J$ (Cooperative Interaction Strength):**
-  * $J > 0$: Fosters localized clusters. A misfolded site ($+1$) increases the energy penalty for adjacent native sites, driving cooperative propagation.
-* **$h$ (Energy Bias / External Field):**
-  * Controls baseline stability. A positive bias ($h > 0$) prevents spontaneous global misfolding, maintaining native state stability unless triggered.
-* **$T$ (Effective Temperature / Thermal Fluctuations):**
-  * Regulates stochastic fluctuations and state-transition probability during Monte Carlo steps.
+Where:
+* **$J$**: Represents the effective interaction strength between neighboring states.
+* **$h$**: Represents an energetic bias between the two states.
+* **$T$**: Controls the magnitude of stochastic thermal fluctuations.
+
+The dynamics are simulated using Metropolis Monte Carlo updates, allowing transitions in both directions:
+
+$$\text{Native} \rightleftharpoons \text{Misfolded}$$
+
 ---
 
-## 3. Dynamics (Metropolis Monte Carlo Algorithm)
+## Main Observable
 
-To simulate state transitions over time, we employ the **Metropolis Monte Carlo** update rule:
+The primary observable is the fraction of misfolded states over time:
 
-1. **State Proposal:** Select a random site $i$ and flip its state:
-   $$s_i \to -s_i$$
+$$f(t) = \frac{N_{\text{misfolded}}(t)}{N}$$
 
-2. **Energy Difference Calculation:** Compute the change in total Hamiltonian energy:
-   $$\Delta H = H_{\text{new}} - H_{\text{old}}$$
+The initial stage of the project focuses on determining whether transition-like or threshold-like behavior emerges from the local interaction rules, rather than assuming that such a transition must exist.
 
-3. **Acceptance Criterion:**
-   * If $\Delta H \leq 0$: **Accept** the spin flip unconditionally (energy decreases or stays constant).
-   * If $\Delta H > 0$: **Accept** the spin flip with a Boltzmann probability:
-     $$P = e^{-\Delta H / (k_B T)}$$
+---
 
-> **Note:** For computational simplicity, we set $k_B = 1$, making $T$ a dimensionless effective temperature parameter ($P = e^{-\Delta H / T}$).
-> 
+## Project Structure
+
+```text
+layer1_lattice/    → Monte Carlo lattice model
+layer1_meanfield/  → Mean-field approximation
+notebooks/         → Analysis and visualization
+results/           → Simulation outputs
