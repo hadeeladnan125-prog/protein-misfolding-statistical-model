@@ -85,14 +85,37 @@ def local_energy(lattice, i, j, J=1.0, h=0.0):
     return interaction_energy + field_energy
 
 
+
+
 # ----------------------------------
 # Test
 # ----------------------------------
 
 if __name__ == "__main__":
-    lattice = initialize_lattice(L, misfolded_fraction=0.01)
+    lattice = initialize_lattice(
+        L,
+        misfolded_fraction=0.01
+    )
 
     print("Lattice shape:", lattice.shape)
-    print("Misfolded fraction:", misfolded_fraction(lattice))
-    e_local = local_energy(lattice, 0, 0, J=1.0, h=0.0)
-    print("Local energy at (0,0):", e_local)
+    print(
+        "Misfolded fraction:",
+        misfolded_fraction(lattice)
+    )
+
+    # Test local energy
+    i, j = 25, 25
+
+    energy = local_energy(
+        lattice,
+        i,
+        j,
+        J=1.0,
+        h=0.0
+    )
+
+    print(
+        "Local energy at (25,25):",
+        energy
+    )
+
