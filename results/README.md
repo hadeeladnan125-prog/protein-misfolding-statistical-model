@@ -42,3 +42,25 @@ With $h = 0.2$, the $s=-1$ state is energetically favored ($E_{\text{Native}} = 
 2. **Crossover Region ($2.0 \le T \le 2.5$):** A smooth transition occurs, crossing $f_0 = 0.10$ near $T \approx 2.5$.
 3. **High $T$ ($T \ge 3.0$):** Thermal noise dominates local coupling and bias, increasing misfolding toward high-entropy states.
 
+---
+
+## Experiment 3: Temperature Refinement & Susceptibility Measurement
+
+### Configuration
+- **Initial Condition ($f_0$):** 0.10
+- **Interaction Strength ($J$):** 1.0
+- **Energetic Bias ($h$):** 0.2
+- **Lattice Size ($L$):** 50x50
+- **Number of Sweeps:** 200
+- **Independent Runs per $T$:** 20
+- **Fine Temperature Range:** $T \in [2.00, 2.80]$ with step size $\Delta T = 0.05$
+
+### Measured Observables
+- **Mean Misfolded Fraction:** $\langle f \rangle$
+- **Variance:** $\mathrm{Var}(f) = \langle f^2 \rangle - \langle f \rangle^2$
+- **Susceptibility:** $\chi_f = \frac{N}{T} \mathrm{Var}(f)$ where $N = L^2$
+
+### Key Observations
+1. **Crossover Threshold:** The mean misfolded fraction crosses $f_0 = 0.10$ between $T = 2.50$ and $T = 2.55$.
+2. **Fluctuation Peak:** Susceptibility $\chi_f$ shows a significant surge above $T = 2.50$, forming a broad peak near $T \in [2.75, 2.80]$. This indicates maximal thermal response in this crossover window.
+
