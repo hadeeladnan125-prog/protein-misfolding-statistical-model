@@ -94,7 +94,7 @@ if __name__ == "__main__":
         misfolded_fraction=0.01
     )
 
-   print("Lattice shape:", lattice.shape)
+       print("Lattice shape:", lattice.shape)
     print("Misfolded fraction:", misfolded_fraction(lattice))
     e_local = local_energy(lattice, 0, 0, J=1.0, h=0.0)
     print("Local energy at (0,0):", e_local)
