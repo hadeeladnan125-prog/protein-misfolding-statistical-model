@@ -113,11 +113,7 @@ All data, parameters, and generated figures are fully reproducible via the provi
 ### Figure 5: Numerical Phase-Space Convergence & Long-Term Stability
 ![Figure 5: Phase-Space Convergence](fig5_phase_space_convergence.png)
 
-* **Caption:** Long-term numerical trajectory integration over $t = 2000\text{ s}$ across three distinct initial condition sets: 
-  * $\text{IC}_1$: $(f_0 = 0.01, \text{ATP}_0 = 1.0)$
-  * $\text{IC}_2$: $(f_0 = 0.05, \text{ATP}_0 = 0.8)$
-  * $\text{IC}_3$: $(f_0 = 0.20, \text{ATP}_0 = 0.5)$
-  All trajectories converge dynamically toward a unified steady-state attractor ($S_E \approx 0.84$ as $f \to 1.0$), providing strong numerical evidence supporting the long-term dynamic stability of the coupled GHK-metabolic feedback model under sustained aggregation stress.
+* **Caption:** Long-term numerical integration over $t = 2000\text{ s}$ across three distinct initial conditions. Logarithmic deviation analysis ($\ln|S_E(t) - S_{E,\text{exact}}^*|$) confirms a linear exponential decay regime with a uniform rate ($\lambda$) during $0 \le t \le 500\text{ s}$ toward a unified attractor ($S_E^* \approx 0.84$). Fluctuations for $t > 500\text{ s}$ represent floating-point precision limits (numerical noise floor) rather than physical dynamics.
 
 
 ## 20. Future Work
