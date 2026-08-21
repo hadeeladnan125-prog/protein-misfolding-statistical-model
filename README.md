@@ -100,9 +100,10 @@ All data, parameters, and generated figures are fully reproducible via the provi
   * `fig2_monte_carlo_uncertainty.png` / `.pdf`
 
 ## 20. Future Work
-* Incorporation of non-Ohmic Goldman-Hodgkin-Katz (GHK) flux equations for calcium dynamics.
+* ~~Incorporation of non-Ohmic Goldman-Hodgkin-Katz (GHK) flux equations for calcium dynamics.~~ (Completed in v2.0)
 * Integration of dynamic membrane potential equations ($dV_m/dt$).
-* Explicit modeling of mitochondrial ATP synthesis feedback loops.
+* ~~Explicit modeling of mitochondrial ATP synthesis feedback loops.~~ (Completed in v2.0)
+
 
 ## 21. References
 1. Strikwerda, J. C. (2004). *Finite Difference Schemes and Partial Differential Equations*. SIAM.
