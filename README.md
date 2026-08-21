@@ -110,6 +110,23 @@ All data, parameters, and generated figures are fully reproducible via the provi
   * `fig2_monte_carlo_uncertainty.png` / `.pdf`
   * `fig3_ghk_vs_ohmic_comparison.png`
   * `fig4_final_rigorous_model.png`
+### Figure 5: Numerical Phase-Space Convergence & Long-Term Stability
+![Figure 5: Phase-Space Convergence](fig5_phase_space_convergence.png)
+
+* **Caption:** Long-term numerical trajectory integration over $t = 2000\text{ s}$ across three distinct initial condition sets: 
+  * $\text{IC}_1$: $(f_0 = 0.01, \text{ATP}_0 = 1.0)$
+  * $\text{IC}_2$: $(f_0 = 0.05, \text{ATP}_0 = 0.8)$
+  * $\text{IC}_3$: $(f_0 = 0.20, \text{ATP}_0 = 0.5)$
+  All trajectories converge dynamically toward a unified steady-state attractor ($S_E \approx 0.84$ as $f \to 1.0$), providing strong numerical evidence supporting the long-term dynamic stability of the coupled GHK-metabolic feedback model under sustained aggregation stress.
+
+![Figure 5: Phase-Space Convergence](fig5_phase_space_convergence.png)
+
+* **Caption:** Long-term numerical trajectory integration over $t = 2000\text{ s}$ across three distinct initial condition sets: 
+  * $\text{IC}_1$: $(f_0 = 0.01, \text{ATP}_0 = 1.0)$
+  * $\text{IC}_2$: $(f_0 = 0.05, \text{ATP}_0 = 0.8)$
+  * $\text{IC}_3$: $(f_0 = 0.20, \text{ATP}_0 = 0.5)$
+  All trajectories converge dynamically toward a unified steady-state attractor ($S_E \approx 0.84$ as $f \to 1.0$), providing strong numerical evidence supporting the long-term dynamic stability of the coupled GHK-metabolic feedback model under sustained aggregation stress.
+
 
 ## 20. Future Work
 * ~~Incorporation of non-Ohmic Goldman-Hodgkin-Katz (GHK) flux equations for calcium dynamics.~~ (Completed in v2.0)
