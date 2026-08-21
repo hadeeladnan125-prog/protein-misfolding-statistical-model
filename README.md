@@ -98,6 +98,8 @@ All data, parameters, and generated figures are fully reproducible via the provi
 * **Publication Figures:**
   * `fig1_baseline_control.png` / `.pdf`
   * `fig2_monte_carlo_uncertainty.png` / `.pdf`
+  * `fig3_ghk_vs_ohmic_comparison.png`
+  * `fig4_final_rigorous_model.png`
 
 ## 20. Future Work
 * ~~Incorporation of non-Ohmic Goldman-Hodgkin-Katz (GHK) flux equations for calcium dynamics.~~ (Completed in v2.0)
