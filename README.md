@@ -10,14 +10,6 @@
 
 ---
 
-**Methods:** We formulated an integrated ODE system linking aggregate kinetics to AMPAR subunit loss, dynamic calcium permeability ($P_{\text{Ca}}$), and non-linear Goldman-Hodgkin-Katz (GHK) flux. Mitochondrial ATP synthesis was incorporated through saturation kinetics. Unbound parameters were constrained using biological values. Parameter variability was tested using a Monte Carlo ensemble ($N=100$ parameter sets drawn from physiological ranges).
-
-**Results:** Transitioning from an Ohmic approximation to GHK flux dynamics substantially reduced the estimated energetic stress $S_E(t)$ under equivalent aggregation inputs, preventing artificial over-saturation. Incorporating dynamic ATP feedback revealed that energy depletion progresses non-linearly, driven by the dynamic balance between calcium-driven ATP consumption and mitochondrial recovery capacity.
-
-**Conclusion:** This model offers an open-source framework connecting protein aggregation to metabolic stress, providing a clearer quantitative baseline for biophysical simulations.
-
----
-
 ## 1. Project Overview
 This project presents a computational biophysical model linking microscopic protein aggregation to macroscopic cellular energetic stress. By integrating statistical mechanics, electrophysiology, and metabolic stoichiometric accounting, the model quantifies how aggregate-induced receptor dysregulation imposes an additional ionic pumping burden on cellular ATP reserves.
 
